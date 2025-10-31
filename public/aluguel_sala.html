@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>CineVille - Aluguel de Sala</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/style/style.css" />
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(229, 9, 20, 0.4));
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .card-custom {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card-custom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(229, 9, 20, 0.3);
+            border-color: rgba(229, 9, 20, 0.5);
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+            border-color: #dc3545;
+        }
+
+        .input-group-text {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-submit:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-lg">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="/assets/img/logo.png" alt="CineVille Logo" height="50" class="me-2">
+                    <span class="fw-bold text-danger">CineVille</span>
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="index.html">
+                                <i class="bi bi-film me-1"></i>Filmes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="snacks.html">
+                                <i class="bi bi-cup-straw me-1"></i>Snacks
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="promocoes.html">
+                                <i class="bi bi-percent me-1"></i>Promoções
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="parcerias.html">
+                                <i class="bi bi-link me-1"></i>Parcerias
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="contato.html">
+                                <i class="bi bi-envelope me-1"></i>Contato
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="aluguel_sala.html">
+                                <i class="bi bi-building me-1"></i>Aluguel de Salas
+                            </a>
+                        </li>
+                        <li class="nav-item" id="loginLink">
+                            <a class="nav-link btn btn-outline-danger rounded-pill px-3 ms-2" href="login.html">
+                                <i class="bi bi-person me-1"></i>Login/Cadastro
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown" id="userMenu" style="display: none;">
+                            <a class="nav-link dropdown-toggle btn btn-danger rounded-pill px-3 ms-2" href="#"
+                                id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle me-1"></i>Olá, <span id="userNameSpan"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark shadow-lg border-0"
+                                aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="minhaConta.html"><i
+                                            class="bi bi-person me-2"></i>Minha Conta</a></li>
+                                <li><a class="dropdown-item" href="historico.html"><i
+                                            class="bi bi-clock-history me-2"></i>Histórico de Compras</a></li>
+                                <li><a class="dropdown-item" href="carrinho.html"><i class="bi bi-cart me-2"></i>Meu
+                                        carrinho</a></li>
+                                <li><a class="dropdown-item" href="feedback.html"><i
+                                            class="bi bi-chat-square-text me-2"></i>Feedback da sessão</a></li>
+                                <li><a class="dropdown-item" href="admin.html" id="adminLink" style="display: none;">
+                                        <i class="bi bi-gear me-2"></i>Painel Administrativo</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#" id="logoutButton">
+                                        <i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container my-5 flex-grow-1">
+        <!-- Hero Section -->
+        <div class="row justify-content-center mb-5" style="margin-top: 100px;">
+            <div class="col-lg-10">
+                <div class="hero-section p-5 shadow-lg position-relative">
+                    <div class="position-relative z-index-1 text-center">
+                        <i class="bi bi-building display-1 text-danger mb-4 d-block"></i>
+                        <h1 class="display-4 fw-bold text-white mb-4">Aluguel de Salas</h1>
+                        <p class="lead text-light mb-4">Transforme nossos espaços cinematográficos em cenário para seus
+                            eventos especiais</p>
+                        <div class="row text-center mt-4">
+                            <div class="col-md-4">
+                                <i class="bi bi-camera-reels text-danger feature-icon"></i>
+                                <h6 class="text-white">Ambiente Cinematográfico</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="bi bi-soundwave text-warning feature-icon"></i>
+                                <h6 class="text-white">Audio Profissional</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="bi bi-display text-info feature-icon"></i>
+                                <h6 class="text-white">Projeção HD</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card card-custom border-0 shadow-lg rounded-4 overflow-hidden">
+                    <div class="card-header text-center py-4"
+                        style="background: linear-gradient(135deg, #dc3545, #b02a37);">
+                        <h2 class="mb-2 fw-bold text-white">
+                            <i class="bi bi-calendar-event me-2"></i>
+                            Solicitação de Aluguel
+                        </h2>
+                        <p class="mb-0 text-white-50">Preencha os dados para sua solicitação</p>
+                    </div>
+                    <div class="card-body p-5" style="background: linear-gradient(145deg, #1a1a1a, #2a2a2a);">
+                        <form id="rentalForm">
+                            <!-- Sala Desejada -->
+                            <div class="mb-4">
+                                <label for="id_sala" class="form-label fw-bold text-light mb-3">
+                                    <i class="bi bi-door-open text-danger me-2"></i>Sala Desejada
+                                </label>
+                                <select class="form-select form-select-lg border-0 shadow-sm"
+                                    id="id_sala" name="id_sala" required>
+                                    <option value="">🎬 Carregando Salas...</option>
+                                </select>
+                            </div>
+
+                            <!-- Data e Horário -->
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="data_evento" class="form-label fw-bold text-light mb-3">
+                                        <i class="bi bi-calendar-date text-danger me-2"></i>Data do Evento
+                                    </label>
+                                    <input type="date"
+                                        class="form-control form-control-lg border-0 shadow-sm"
+                                        id="data_evento" name="data_evento" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="horario_inicio" class="form-label fw-bold text-light mb-3">
+                                        <i class="bi bi-clock text-danger me-2"></i>Hora de Início
+                                    </label>
+                                    <input type="time"
+                                        class="form-control form-control-lg border-0 shadow-sm"
+                                        id="horario_inicio" name="horario_inicio" required>
+                                </div>
+                            </div>
+
+                            <!-- Convidados -->
+                            <div class="mb-4">
+                                <label for="numero_convidados" class="form-label fw-bold text-light mb-3">
+                                    <i class="bi bi-people text-danger me-2"></i>Número de Convidados
+                                </label>
+                                <div class="input-group input-group-lg shadow-sm">
+                                    <span class="input-group-text border-0 text-white">
+                                        <i class="bi bi-person-plus"></i>
+                                    </span>
+                                    <input type="number" class="form-control border-0"
+                                        id="numero_convidados" name="numero_convidados" min="1"
+                                        placeholder="Quantas pessoas?" required>
+                                </div>
+                            </div>
+
+                            <!-- Finalidade -->
+                            <div class="mb-4">
+                                <label for="finalidade" class="form-label fw-bold text-light mb-3">
+                                    <i class="bi bi-tag text-danger me-2"></i>Finalidade do Aluguel
+                                </label>
+                                <select class="form-select form-select-lg border-0 shadow-sm"
+                                    id="finalidade" name="finalidade" required>
+                                    <option value="">🎯 Selecione a Finalidade</option>
+                                    <option value="aniversario">🎂 Aniversário</option>
+                                    <option value="reuniao">💼 Reunião</option>
+                                    <option value="festa_infantil">🎈 Festa Infantil</option>
+                                    <option value="casamento">💒 Casamento</option>
+                                    <option value="conferencia">🎤 Conferência</option>
+                                    <option value="workshop">📚 Workshop</option>
+                                    <option value="lancamento_produto">🚀 Lançamento de Produto</option>
+                                    <option value="ensaio_fotografico">📸 Ensaio Fotográfico</option>
+                                    <option value="gravacao_video">🎥 Gravação de Vídeo</option>
+                                    <option value="formatura">🎓 Formatura</option>
+                                    <option value="exposicao">🖼️ Exposição</option>
+                                    <option value="curso">📖 Curso</option>
+                                    <option value="ensaio">🎭 Ensaio</option>
+                                    <option value="outro">❓ Outro</option>
+                                </select>
+                            </div>
+
+                            <!-- Mensagem -->
+                            <div class="mb-5">
+                                <label for="mensagem" class="form-label fw-bold text-light mb-3">
+                                    <i class="bi bi-chat-text text-danger me-2"></i>Mensagem / Detalhes Adicionais
+                                </label>
+                                <textarea class="form-control form-control-lg border-0 shadow-sm"
+                                    id="mensagem" name="mensagem" rows="4"
+                                    placeholder="Conte-nos mais sobre seu evento..."></textarea>
+                            </div>
+
+                            <!-- Botão Submit -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-submit btn-lg py-4 fw-bold shadow-lg text-white">
+                                    <i class="bi bi-send-fill me-2"></i>
+                                    Enviar Solicitação
+                                    <i class="bi bi-arrow-right-circle ms-2"></i>
+                                </button>
+                            </div>
+                            <div id="formMessage" class="mt-3 text-center"></div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="row mt-5 g-4">
+                    <div class="col-md-4">
+                        <div class="card card-custom border-0 shadow-lg h-100 text-center">
+                            <div class="card-body p-4">
+                                <i class="bi bi-shield-check display-4 text-success mb-3 d-block"></i>
+                                <h5 class="text-white fw-bold mb-3">Segurança Total</h5>
+                                <p class="text-light mb-3">Ambiente seguro com monitoramento 24h e sistemas de segurança
+                                    modernos</p>
+                                <div class="d-flex justify-content-center">
+                                    <span class="badge bg-success px-3 py-2">
+                                        <i class="bi bi-check-circle me-1"></i>Certificado
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-custom border-0 shadow-lg h-100 text-center">
+                            <div class="card-body p-4">
+                                <i class="bi bi-tools display-4 text-warning mb-3 d-block"></i>
+                                <h5 class="text-white fw-bold mb-3">Equipamentos Pro</h5>
+                                <p class="text-light mb-3">Som, projeção e iluminação profissional para tornar seu
+                                    evento único</p>
+                                <div class="d-flex justify-content-center">
+                                    <span class="badge bg-warning text-dark px-3 py-2">
+                                        <i class="bi bi-star-fill me-1"></i>Premium
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-custom border-0 shadow-lg h-100 text-center">
+                            <div class="card-body p-4">
+                                <i class="bi bi-headset display-4 text-info mb-3 d-block"></i>
+                                <h5 class="text-white fw-bold mb-3">Suporte Completo</h5>
+                                <p class="text-light mb-3">Equipe especializada para acompanhar e garantir o sucesso do
+                                    seu evento</p>
+                                <div class="d-flex justify-content-center">
+                                    <span class="badge bg-info px-3 py-2">
+                                        <i class="bi bi-people-fill me-1"></i>24/7
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="text-danger fw-bold mb-3">
+                        <i class="bi bi-film me-2"></i>CineVille
+                    </h5>
+                    <p class="text-white">O melhor cinema do seu bairro, com tecnologia de ponta e atendimento
+                        excepcional.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-3 fs-4 transition"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white me-3 fs-4 transition"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white fs-4 transition"><i class="bi bi-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">Links Rápidos</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">Filmes</a></li>
+                        <li><a href="snacks.html" class="text-white text-decoration-none">Snacks</a></li>
+                        <li><a href="promocoes.html" class="text-white text-decoration-none">Promoções</a></li>
+                        <li><a href="aluguel_sala.html" class="text-white text-decoration-none">Aluguel de Salas</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">Contato</h6>
+                    <ul class="list-unstyled text-white">
+                        <li><i class="bi bi-geo-alt me-2"></i>Rua do Cinema, 123</li>
+                        <li><i class="bi bi-telephone me-2"></i>(11) 9999-9999</li>
+                        <li><i class="bi bi-envelope me-2"></i>contato@cineville.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 Protótipo CineVille - Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/aluguel_sala.js"></script>
+    <script src="/assets/js/auth.js"></script>
+</body>
+
+</html>

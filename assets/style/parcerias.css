@@ -1,0 +1,304 @@
+/* parcerias.css - Estilo exclusivo para página de Parcerias */
+
+/* ==================== VARIÁVEIS ==================== */
+:root {
+  --vermelho-cineville: #e50914;
+  --preto-fundo: #121212;
+  --preto-card: #1a1a1a;
+  --preto-detalhe: #282828;
+  --cinza-texto: #b3b3b3;
+  --branco: #ffffff;
+  --destaque-ouro: #ffd700;
+}
+
+/* ==================== BASE ==================== */
+body.parcerias-page {
+  background-color: var(--preto-fundo);
+  color: var(--branco);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* ==================== HEADER ==================== */
+.parcerias-header {
+  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+              url('../img/Diversos/parcerias-bg.jpg') center/cover no-repeat;
+  padding: 8rem 0 4rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.parcerias-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.parcerias-header p.lead {
+  font-size: 1.2rem;
+  color: var(--cinza-texto);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ==================== CARDS DE PARCERIAS ==================== */
+.parceria-card-detailed {
+  background: var(--preto-card);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--vermelho-cineville);
+}
+
+.parceria-card-detailed:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(229, 9, 20, 0.3);
+}
+
+.parceria-img-container {
+  height: 250px;
+  overflow: hidden;
+}
+
+.parceria-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.parceria-card-detailed:hover .parceria-img {
+  transform: scale(1.05);
+}
+
+.parceria-body {
+  padding: 1.5rem;
+}
+
+.parceria-title {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--branco);
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.parceria-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--vermelho-cineville);
+}
+
+.parceria-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  color: var(--cinza-texto);
+  font-size: 0.9rem;
+}
+
+.parceria-badge {
+  background: var(--vermelho-cineville);
+  color: var(--branco);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.parceria-description {
+  color: var(--cinza-texto);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* ==================== SEÇÃO DE BENEFÍCIOS ==================== */
+.benefits-section {
+  background: var(--preto-detalhe);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+
+.benefits-title {
+  font-size: 1.25rem;
+  color: var(--branco);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.benefits-title i {
+  color: var(--vermelho-cineville);
+  margin-right: 0.5rem;
+}
+
+.benefits-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.benefits-list li {
+  padding: 0.5rem 0;
+  padding-left: 1.75rem;
+  position: relative;
+  color: var(--cinza-texto);
+}
+
+.benefits-list li::before {
+  content: '✓';
+  color: var(--vermelho-cineville);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+/* ==================== BOTÕES ==================== */
+.btn-parceria {
+  background: transparent;
+  color: var(--vermelho-cineville);
+  border: 2px solid var(--vermelho-cineville);
+  padding: 0.5rem 1.5rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-parceria:hover {
+  background: var(--vermelho-cineville);
+  color: var(--branco);
+  transform: translateY(-2px);
+}
+
+/* ==================== PARCERIAS PREMIUM ==================== */
+.parceria-premium {
+  position: relative;
+  border: 2px solid var(--destaque-ouro);
+}
+
+.parceria-premium::before {
+  content: 'PREMIUM';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--destaque-ouro);
+  color: #000;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  z-index: 10;
+}
+
+/* ==================== RESPONSIVIDADE ==================== */
+@media (max-width: 992px) {
+  .parcerias-header {
+    padding: 6rem 0 3rem;
+  }
+  
+  .parceria-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .parcerias-header {
+    padding: 5rem 0 2rem;
+  }
+  
+  .parcerias-header h1 {
+    font-size: 2rem;
+  }
+  
+  .parcerias-header p.lead {
+    font-size: 1rem;
+  }
+  
+  .parceria-img-container {
+    height: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .parcerias-header {
+    padding: 4rem 0 1.5rem;
+  }
+  
+  .parcerias-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .parceria-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .parceria-body {
+    padding: 1.25rem;
+  }
+}
+
+/* ==================== ANIMAÇÕES ==================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.parceria-card-detailed {
+  animation: fadeIn 0.6s ease forwards;
+  opacity: 0;
+}
+
+.parceria-card-detailed:nth-child(1) { animation-delay: 0.1s; }
+.parceria-card-detailed:nth-child(2) { animation-delay: 0.2s; }
+.parceria-card-detailed:nth-child(3) { animation-delay: 0.3s; }
+.parceria-card-detailed:nth-child(4) { animation-delay: 0.4s; }
+
+/* Estilo para mensagem de não logado */
+#content-not-logged {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#content-not-logged h2 {
+    color: var(--vermelho-cineville);
+    font-size: 2rem;
+}
+
+#content-not-logged .lead {
+    font-size: 1.2rem;
+    max-width: 500px;
+}
+
+/* Dropdown do usuário */
+.dropdown-menu {
+    background-color: var(--preto-card);
+    border: 1px solid var(--preto-detalhe);
+}
+
+.dropdown-item {
+    color: var(--cinza-texto);
+}
+
+.dropdown-item:hover {
+    background-color: var(--vermelho-cineville);
+    color: var(--branco);
+}
+
+.dropdown-divider {
+    border-color: var(--preto-detalhe);
+}

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback da Sessão - CineVille</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/style/style.css" />
+    <style>
+        .feedback-hero {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(229, 9, 20, 0.3));
+            border-radius: 15px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .feedback-card {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .feedback-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(229, 9, 20, 0.2);
+        }
+
+        .star-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            border: 2px solid #ffc107;
+            background: transparent;
+            color: #666;
+        }
+
+        .star-btn:hover,
+        .star-btn.active {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #000;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.5);
+        }
+
+        .star-btn.active i {
+            content: '\F586';
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+            border-color: #dc3545;
+            background-color: #2a2a2a;
+            color: #fff;
+        }
+
+        .form-control,
+        .form-select {
+            background-color: #222;
+            border-color: #444;
+            color: #fff;
+        }
+
+        .input-group-text {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .accordion-button {
+            background-color: #333;
+            color: white;
+            border: none;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #dc3545;
+            color: white;
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+
+        .accordion-item {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+        }
+
+        .accordion-body {
+            background-color: #1a1a1a;
+            color: #ddd;
+        }
+
+        .rating-container {
+            background: linear-gradient(135deg, #222, #333);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-lg">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="/assets/img/logo.png" alt="CineVille Logo" height="50" class="me-2">
+                    <span class="fw-bold text-danger">CineVille</span>
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="index.html">
+                                <i class="bi bi-film me-1"></i>Filmes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="snacks.html">
+                                <i class="bi bi-cup-straw me-1"></i>Snacks
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="promocoes.html">
+                                <i class="bi bi-percent me-1"></i>Promoções
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="parcerias.html">
+                                <i class="bi bi-link me-1"></i>Parcerias
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="contato.html">
+                                <i class="bi bi-envelope me-1"></i>Contato
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="aluguel_sala.html">
+                                <i class="bi bi-building me-1"></i>Aluguel de Salas
+                            </a>
+                        </li>
+                        <li class="nav-item" id="loginLink">
+                            <a class="nav-link btn btn-outline-danger rounded-pill px-3 ms-2" href="login.html">
+                                <i class="bi bi-person me-1"></i>Login/Cadastro
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown" id="userMenu" style="display: none;">
+                            <a class="nav-link dropdown-toggle btn btn-danger rounded-pill px-3 ms-2" href="#"
+                                id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle me-1"></i>Olá, <span id="userNameSpan"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark shadow-lg border-0"
+                                aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="minhaConta.html"><i
+                                            class="bi bi-person me-2"></i>Minha Conta</a></li>
+                                <li><a class="dropdown-item" href="historico.html"><i
+                                            class="bi bi-clock-history me-2"></i>Histórico de Compras</a></li>
+                                <li><a class="dropdown-item" href="carrinho.html"><i class="bi bi-cart me-2"></i>Meu
+                                        carrinho</a></li>
+                                <li><a class="dropdown-item" href="feedback.html"><i
+                                            class="bi bi-chat-square-text me-2"></i>Feedback da sessão</a></li>
+                                <li><a class="dropdown-item" href="admin.html" id="adminLink" style="display: none;">
+                                        <i class="bi bi-gear me-2"></i>Painel Administrativo</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#" id="logoutButton">
+                                        <i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-shrink-0">
+        <!-- Hero Section -->
+        <div class="container-fluid px-0">
+            <div class="feedback-hero text-center py-5" style="margin-top: 80px;">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <i class="bi bi-chat-square-text-fill display-1 text-danger mb-3"></i>
+                            <h1 class="display-4 fw-bold text-white mb-3">Feedback da Sessão</h1>
+                            <p class="lead text-light mb-4">Sua opinião é importante para melhorarmos nossa experiência
+                                cinematográfica</p>
+                            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                                <span class="badge bg-danger fs-6 px-3 py-2">
+                                    <i class="bi bi-heart me-1"></i>Sua Voz Importa
+                                </span>
+                                <span class="badge bg-warning text-dark fs-6 px-3 py-2">
+                                    <i class="bi bi-star me-1"></i>Melhoria Contínua
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="feedback-card shadow-lg">
+                        <div class="card-header bg-danger text-white text-center py-4">
+                            <h2 class="mb-0 fw-bold">
+                                <i class="bi bi-star-fill me-2"></i>
+                                Avalie sua Experiência
+                            </h2>
+                            <small class="opacity-75">Conte-nos como foi sua sessão no CineVille</small>
+                        </div>
+                        <div class="card-body p-5">
+                            <form id="feedbackForm">
+                                <!-- ID da Sessão -->
+                                <div class="mb-4">
+                                    <label for="id_sessao" class="form-label fw-semibold text-light">
+                                        <i class="bi bi-ticket-perforated text-danger me-2"></i>ID da Sessão
+                                    </label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text">
+                                            <i class="bi bi-hash"></i>
+                                        </span>
+                                        <input type="number" class="form-control" id="id_sessao"
+                                            placeholder="Digite o ID da sua sessão" required>
+                                    </div>
+                                    <div class="form-text text-white small mt-2">
+                                        <i class="bi bi-info-circle me-1"></i>
+                                        Você pode encontrar o ID no seu ingresso ou e-mail de confirmação
+                                    </div>
+                                </div>
+
+                                <!-- Avaliação com Estrelas -->
+                                <!-- <div class="mb-4">
+                                    <label class="form-label fw-semibold text-light">
+                                        <i class="bi bi-star text-danger me-2"></i>Avaliação Geral da Experiência
+                                    </label>
+                                    <div class="rating-container text-center">
+                                        <div class="d-flex gap-2 mb-3 justify-content-center">
+                                            <button type="button" class="btn star-btn" data-rating="1">
+                                                <i class="bi bi-star"></i>
+                                            </button>
+                                            <button type="button" class="btn star-btn" data-rating="2">
+                                                <i class="bi bi-star"></i>
+                                            </button>
+                                            <button type="button" class="btn star-btn" data-rating="3">
+                                                <i class="bi bi-star"></i>
+                                            </button>
+                                            <button type="button" class="btn star-btn" data-rating="4">
+                                                <i class="bi bi-star"></i>
+                                            </button>
+                                            <button type="button" class="btn star-btn" data-rating="5">
+                                                <i class="bi bi-star"></i>
+                                            </button>
+                                        </div>
+                                        <div id="ratingText" class="text-white">
+                                            <small>Clique nas estrelas para avaliar</small>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <!-- Tipo de Problema -->
+                                <div class="mb-4">
+                                    <label for="tipo_problema" class="form-label fw-semibold text-light">
+                                        <i class="bi bi-exclamation-triangle text-danger me-2"></i>Tipo de Problema (se
+                                        houver)
+                                    </label>
+                                    <select class="form-select form-select-lg" id="tipo_problema">
+                                        <option value="">🎯 Nenhum problema - Tudo perfeito!</option>
+                                        <option value="luz acesa">💡 Luz acesa durante a sessão</option>
+                                        <option value="sem som">🔇 Problemas de áudio</option>
+                                        <option value="imagem ruim">📺 Problemas de imagem/projeção</option>
+                                        <option value="pessoas inconvenientes">👥 Pessoas inconvenientes</option>
+                                        <option value="temperatura inadequada">🌡️ Temperatura inadequada</option>
+                                        <option value="limpeza">🧹 Problemas de limpeza</option>
+                                        <option value="atendimento">👨‍💼 Atendimento</option>
+                                        <option value="outro">❓ Outro problema</option>
+                                    </select>
+                                </div>
+
+                                <!-- Mensagem -->
+                                <div class="mb-4">
+                                    <label for="mensagem" class="form-label fw-semibold text-light">
+                                        <i class="bi bi-chat-text text-danger me-2"></i>Descreva sua Experiência
+                                    </label>
+                                    <textarea class="form-control form-control-lg" id="mensagem" rows="6"
+                                        placeholder="Conte-nos todos os detalhes sobre sua experiência no CineVille. Elogios, sugestões e críticas construtivas são muito bem-vindos!"
+                                        required></textarea>
+                                    <div class="form-text text-white small mt-2">
+                                        <i class="bi bi-pencil me-1"></i>
+                                        Seja específico para que possamos continuar melhorando nossos serviços
+                                    </div>
+                                </div>
+
+                                <!-- Botão Submit -->
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-danger btn-lg py-3 fw-bold shadow-lg">
+                                        <i class="bi bi-send me-2"></i>
+                                        Enviar Feedback
+                                        <i class="bi bi-heart ms-2"></i>
+                                    </button>
+                                </div>
+                                <div id="feedback-msg" class="mt-3 d-none"></div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Seção de Benefícios do Feedback -->
+                    <div class="row mt-5 g-4">
+                        <div class="col-md-4">
+                            <div class="card bg-dark border-0 shadow h-100 text-center">
+                                <div class="card-body p-4">
+                                    <i class="bi bi-gift display-4 text-success mb-3"></i>
+                                    <h5 class="text-white fw-bold">Recompensas</h5>
+                                    <p class="text-white">Feedbacks detalhados podem render pontos extras no seu
+                                        programa de fidelidade!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-dark border-0 shadow h-100 text-center">
+                                <div class="card-body p-4">
+                                    <i class="bi bi-chat-heart display-4 text-danger mb-3"></i>
+                                    <h5 class="text-white fw-bold">Sua Voz Importa</h5>
+                                    <p class="text-white">Cada feedback é lido pela nossa equipe e usado para melhorar
+                                        sua experiência</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-dark border-0 shadow h-100 text-center">
+                                <div class="card-body p-4">
+                                    <i class="bi bi-lightning-charge display-4 text-warning mb-3"></i>
+                                    <h5 class="text-white fw-bold">Resposta Rápida</h5>
+                                    <p class="text-white">Problemas urgentes são priorizados e resolvidos rapidamente
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Section -->
+                    <div class="card bg-dark border-0 shadow-lg mt-5">
+                        <div class="card-header bg-secondary text-white py-3">
+                            <h5 class="mb-0">
+                                <i class="bi bi-question-circle me-2"></i>
+                                Perguntas Frequentes
+                            </h5>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="accordion" id="faqAccordion">
+                                <div class="accordion-item mb-2 rounded">
+                                    <h6 class="accordion-header">
+                                        <button class="accordion-button collapsed rounded" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq1">
+                                            <i class="bi bi-ticket me-2"></i>
+                                            Onde encontro o ID da sessão?
+                                        </button>
+                                    </h6>
+                                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            O ID da sessão está impresso no seu ingresso (físico ou digital), no e-mail
+                                            de confirmação da compra,
+                                            ou você pode encontrá-lo no seu histórico de compras na seção "Minha Conta".
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item mb-2 rounded">
+                                    <h6 class="accordion-header">
+                                        <button class="accordion-button collapsed rounded" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq2">
+                                            <i class="bi bi-clock me-2"></i>
+                                            Quanto tempo tenho para enviar feedback?
+                                        </button>
+                                    </h6>
+                                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            Recomendamos enviar o feedback em até 48 horas após a sessão para que
+                                            possamos agir rapidamente.
+                                            Porém, aceitamos feedbacks até 7 dias após a sessão.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item mb-2 rounded">
+                                    <h6 class="accordion-header">
+                                        <button class="accordion-button collapsed rounded" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq3">
+                                            <i class="bi bi-award me-2"></i>
+                                            Posso ganhar pontos por dar feedback?
+                                        </button>
+                                    </h6>
+                                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            Sim! Feedbacks construtivos e detalhados podem render pontos extras no seu
+                                            programa de fidelidade CineVille.
+                                            Os pontos são creditados em até 24 horas.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-5 mt-0 border-top border-danger">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="text-danger fw-bold mb-3">
+                        <i class="bi bi-film me-2"></i>CineVille
+                    </h5>
+                    <p class="text-white">O melhor cinema do seu bairro, com tecnologia de ponta e atendimento
+                        excepcional.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-3 fs-4">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" class="text-white me-3 fs-4">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="text-white fs-4">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">Atendimento</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="feedback.html" class="text-white text-decoration-none">Feedback</a></li>
+                        <li><a href="contato.html" class="text-white text-decoration-none">Contato</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Suporte</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">Contato</h6>
+                    <ul class="list-unstyled text-white">
+                        <li><i class="bi bi-geo-alt me-2"></i>Rua do Cinema, 123</li>
+                        <li><i class="bi bi-telephone me-2"></i>(11) 9999-9999</li>
+                        <li><i class="bi bi-envelope me-2"></i>contato@cineville.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 Protótipo CineVille - Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ====== SCRIPT FINAL CORRIGIDO PARA feedback.html ======
+
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('🚀 Iniciando script do feedback...');
+
+            // Verifica se o usuário está logado
+            const userId = localStorage.getItem('userId');
+            const userType = localStorage.getItem('userType');
+            const userName = localStorage.getItem('userName');
+
+            console.log('User ID:', userId, 'Type:', userType, 'Name:', userName);
+
+            if (!userId) {
+                alert('Você precisa estar logado para enviar feedback.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Atualiza a navegação
+            const loginLink = document.getElementById('loginLink');
+            const userMenu = document.getElementById('userMenu');
+            const userNameSpan = document.getElementById('userNameSpan');
+            const adminLink = document.getElementById('adminLink');
+
+            if (loginLink) {
+                loginLink.style.display = 'none';
+            }
+
+            if (userMenu) {
+                userMenu.style.display = 'block';
+            }
+
+            if (userNameSpan && userName) {
+                userNameSpan.textContent = userName;
+            }
+
+            if (userType === 'admin' && adminLink) {
+                adminLink.style.display = 'block';
+            }
+
+            // Elementos do formulário
+            const feedbackForm = document.getElementById('feedbackForm');
+            const feedbackMsg = document.getElementById('feedback-msg');
+
+            console.log('Form element:', feedbackForm);
+            console.log('Message element:', feedbackMsg);
+
+            if (!feedbackForm) {
+                console.error('❌ Formulário não encontrado!');
+                alert('Erro: Formulário não encontrado na página.');
+                return;
+            }
+
+            if (!feedbackMsg) {
+                console.error('❌ Elemento de mensagem não encontrado!');
+                // Continua mesmo sem o elemento de mensagem
+            }
+
+            // Event listener para o formulário
+            feedbackForm.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                console.log('📝 Formulário submetido');
+
+                // Pegar valores dos campos
+                const idSessaoElement = document.getElementById('id_sessao');
+                const tipoProblemaElement = document.getElementById('tipo_problema');
+                const mensagemElement = document.getElementById('mensagem');
+
+                if (!idSessaoElement || !tipoProblemaElement || !mensagemElement) {
+                    const errorMsg = 'Erro: Alguns campos do formulário não foram encontrados.';
+                    console.error('❌', errorMsg);
+                    alert(errorMsg);
+                    return;
+                }
+
+                const idSessao = idSessaoElement.value.trim();
+                const tipoProblema = tipoProblemaElement.value;
+                const mensagem = mensagemElement.value.trim();
+
+                console.log('Dados do formulário:', {
+                    idSessao,
+                    tipoProblema,
+                    mensagem
+                });
+
+                // Validação
+                if (!idSessao) {
+                    alert('Por favor, informe o ID da sessão.');
+                    idSessaoElement.focus();
+                    return;
+                }
+
+                if (!mensagem) {
+                    alert('Por favor, descreva sua experiência.');
+                    mensagemElement.focus();
+                    return;
+                }
+
+                // Botão de submit
+                const submitBtn = event.target.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+
+                if (submitBtn) {
+                    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Enviando...';
+                    submitBtn.disabled = true;
+                }
+
+                // Preparar dados para envio
+                const feedbackData = {
+                    id_sessao: parseInt(idSessao),
+                    tipo_problema: tipoProblema || 'outro',
+                    mensagem: mensagem
+                };
+
+                console.log('Enviando dados:', feedbackData);
+
+                try {
+                    const response = await fetch('/api/feedback', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-user-id': userId,
+                            'x-user-type': userType
+                        },
+                        body: JSON.stringify(feedbackData)
+                    });
+
+                    console.log('Response status:', response.status);
+
+                    const result = await response.json();
+                    console.log('Response data:', result);
+
+                    if (response.ok) {
+                        // Sucesso
+                        const successMsg = 'Feedback enviado com sucesso! Obrigado por sua colaboração.';
+                        console.log('✅', successMsg);
+
+                        if (feedbackMsg) {
+                            feedbackMsg.innerHTML = `
+                        <div class="alert alert-success">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            <strong>Sucesso!</strong> ${successMsg}
+                        </div>
+                    `;
+                            feedbackMsg.classList.remove('d-none');
+                        } else {
+                            alert(successMsg);
+                        }
+
+                        // Limpar formulário
+                        feedbackForm.reset();
+
+                    } else {
+                        // Erro
+                        const errorMsg = result.message || 'Erro ao enviar feedback.';
+                        console.error('❌', errorMsg);
+
+                        if (feedbackMsg) {
+                            feedbackMsg.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <strong>Erro!</strong> ${errorMsg}
+                        </div>
+                    `;
+                            feedbackMsg.classList.remove('d-none');
+                        } else {
+                            alert('Erro: ' + errorMsg);
+                        }
+                    }
+
+                } catch (error) {
+                    console.error('❌ Erro na requisição:', error);
+                    const errorMsg = 'Erro de conexão. Verifique sua internet e tente novamente.';
+
+                    if (feedbackMsg) {
+                        feedbackMsg.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-wifi-off me-2"></i>
+                        <strong>Erro de Conexão!</strong> ${errorMsg}
+                    </div>
+                `;
+                        feedbackMsg.classList.remove('d-none');
+                    } else {
+                        alert(errorMsg);
+                    }
+                } finally {
+                    // Restaurar botão
+                    if (submitBtn) {
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.disabled = false;
+                    }
+                }
+            });
+
+            // Logout
+            const logoutButton = document.getElementById('logoutButton');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    console.log('🚪 Fazendo logout...');
+
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('userType');
+                    localStorage.removeItem('userName');
+
+
+                    window.location.href = 'index.html';
+                });
+            }
+
+            console.log('✅ Script do feedback inicializado com sucesso');
+        });
+
+        // Função de debug
+        function testFeedbackElements() {
+            console.log('=== TESTE DOS ELEMENTOS ===');
+            console.log('feedbackForm:', !!document.getElementById('feedbackForm'));
+            console.log('feedback-msg:', !!document.getElementById('feedback-msg'));
+            console.log('id_sessao:', !!document.getElementById('id_sessao'));
+            console.log('tipo_problema:', !!document.getElementById('tipo_problema'));
+            console.log('mensagem:', !!document.getElementById('mensagem'));
+            console.log('logoutButton:', !!document.getElementById('logoutButton'));
+            console.log('==========================');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/auth.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - CineVille</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="cadastro-page">
+    <div class="min-vh-100 d-flex align-items-center justify-content-center bg-dark position-relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="position-absolute w-100 h-100">
+            <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient opacity-15"></div>
+            <!-- Floating cinema elements -->
+            <div class="position-absolute" style="top: 10%; left: 10%; width: 250px; height: 250px; background: radial-gradient(circle, rgba(229,9,20,0.1) 0%, transparent 70%); border-radius: 50%; animation: float 8s ease-in-out infinite;"></div>
+            <div class="position-absolute" style="bottom: 15%; right: 10%; width: 180px; height: 180px; background: radial-gradient(circle, rgba(229,9,20,0.15) 0%, transparent 70%); border-radius: 50%; animation: float 6s ease-in-out infinite reverse;"></div>
+            <div class="position-absolute" style="top: 60%; left: 5%; width: 120px; height: 120px; background: radial-gradient(circle, rgba(229,9,20,0.08) 0%, transparent 70%); border-radius: 50%; animation: float 10s ease-in-out infinite;"></div>
+            <!-- Film reel decorations -->
+            <div class="film-reel position-absolute" style="top: 20%; right: 20%; opacity: 0.05;">
+                <i class="bi bi-camera-reels" style="font-size: 8rem; color: #e50914;"></i>
+            </div>
+            <div class="film-reel position-absolute" style="bottom: 25%; left: 15%; opacity: 0.03;">
+                <i class="bi bi-film" style="font-size: 6rem; color: #e50914;"></i>
+            </div>
+        </div>
+
+        <div class="container position-relative z-index-1">
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-5">
+                    <!-- Logo Section -->
+                    <div class="text-center mb-4">
+                        <div class="logo-circle mx-auto mb-3">
+                            <i class="bi bi-person-plus display-3 text-white"></i>
+                        </div>
+                        <h2 class="text-white fw-bold">CineVille</h2>
+                        <p class="text-white">Junte-se à família!</p>
+                    </div>
+
+                    <div class="card bg-dark border-0 shadow-lg rounded-4 cinema-card">
+                        <!-- Header -->
+                        <div class="card-header bg-danger text-white text-center py-4 rounded-top-4">
+                            <div class="mb-2">
+                                <i class="bi bi-ticket-perforated display-5"></i>
+                            </div>
+                            <h1 class="mb-0 fw-bold fs-3">Criar Conta</h1>
+                            <small class="opacity-75">Seu ingresso para o mundo do cinema</small>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="card-body p-4">
+                            <form id="cadastroForm">
+                                <!-- Nome -->
+                                <div class="mb-4">
+                                    <label for="nome" class="form-label fw-semibold text-light">
+                                        <i class="bi bi-person text-danger me-2"></i>Nome Completo
+                                    </label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text bg-danger border-0 text-white">
+                                            <i class="bi bi-person-fill"></i>
+                                        </span>
+                                        <input type="text" name="nome" id="nome" 
+                                               class="form-control border-0 bg-secondary text-white cinema-input" 
+                                               placeholder="Digite seu nome completo" required minlength="2">
+                                    </div>
+                                    <div class="form-text text-white-50 small mt-1">
+                                        <i class="bi bi-info-circle me-1"></i>
+                                        Como você gostaria de ser chamado
+                                    </div>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="mb-4">
+                                    <label for="email" class="form-label fw-semibold text-light">
+                                        <i class="bi bi-envelope text-danger me-2"></i>Email
+                                    </label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text bg-danger border-0 text-white">
+                                            <i class="bi bi-envelope-fill"></i>
+                                        </span>
+                                        <input type="email" name="email" id="email" 
+                                               class="form-control border-0 bg-secondary text-white cinema-input" 
+                                               placeholder="seu@email.com" required>
+                                    </div>
+                                    <div class="form-text text-white-50 small mt-1">
+                                        <i class="bi bi-info-circle me-1"></i>
+                                        Usaremos para confirmações e promoções
+                                    </div>
+                                </div>
+
+                                <!-- Senha -->
+                                <div class="mb-4">
+                                    <label for="senha" class="form-label fw-semibold text-light">
+                                        <i class="bi bi-shield-lock text-danger me-2"></i>Senha
+                                    </label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text bg-danger border-0 text-white">
+                                            <i class="bi bi-shield-lock-fill"></i>
+                                        </span>
+                                        <input type="password" name="senha" id="senha" 
+                                               class="form-control border-0 bg-secondary text-white cinema-input" 
+                                               placeholder="Crie uma senha segura" required minlength="6">
+                                        <button class="btn btn-outline-secondary border-0 password-toggle" type="button" id="togglePassword">
+                                            <i class="bi bi-eye text-white"></i>
+                                        </button>
+                                    </div>
+                                    <div class="password-strength-meter mt-2">
+                                        <div class="password-strength-bar">
+                                            <div id="passwordStrengthFill" class="password-strength-fill"></div>
+                                        </div>
+                                        <small id="passwordStrengthText" class="form-text text-white-50">
+                                            <i class="bi bi-info-circle me-1"></i>
+                                            Mínimo 6 caracteres, inclua números e símbolos
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <!-- Confirmar Senha -->
+                                <div class="mb-4">
+                                    <label for="confirmarSenha" class="form-label fw-semibold text-light">
+                                        <i class="bi bi-shield-check text-danger me-2"></i>Confirmar Senha
+                                    </label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text bg-danger border-0 text-white">
+                                            <i class="bi bi-shield-check-fill"></i>
+                                        </span>
+                                        <input type="password" name="confirmarSenha" id="confirmarSenha" 
+                                               class="form-control border-0 bg-secondary text-white cinema-input" 
+                                               placeholder="Digite a senha novamente" required minlength="6">
+                                        <button class="btn btn-outline-secondary border-0 password-toggle" type="button" id="toggleConfirmPassword">
+                                            <i class="bi bi-eye text-white"></i>
+                                        </button>
+                                    </div>
+                                    <div id="passwordMatchMessage" class="form-text small mt-1"></div>
+                                </div>
+
+                                <!-- Termos e Condições -->
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="aceitoTermos" required>
+                                        <label class="form-check-label text-white" for="aceitoTermos">
+                                            Aceito os <a href="#" class="text-danger text-decoration-none">Termos de Uso</a> 
+                                            e <a href="#" class="text-danger text-decoration-none">Política de Privacidade</a>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Newsletter -->
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="newsletter" checked>
+                                        <label class="form-check-label text-white" for="newsletter">
+                                            <i class="bi bi-envelope-heart text-danger me-2"></i>
+                                            Quero receber novidades e promoções exclusivas
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Botões -->
+                                <div class="d-grid gap-3">
+                                    <button type="submit" id="btnCadastrar" 
+                                            class="btn btn-danger btn-lg py-3 fw-bold shadow cinema-btn" disabled>
+                                        <i class="bi bi-person-plus me-2"></i>
+                                        Criar Minha Conta
+                                        <div class="spinner-border spinner-border-sm ms-2 d-none" id="loadingSpinner"></div>
+                                    </button>
+                                    
+                                    <button type="button" id="btnCancelar" 
+                                            class="btn btn-outline-secondary btn-lg py-2">
+                                        <i class="bi bi-arrow-left me-2"></i>
+                                        Voltar ao Início
+                                    </button>
+                                </div>
+
+                                <!-- Link para login -->
+                                <div class="text-center mt-4 pt-3 border-top border-secondary">
+                                    <p class="text-white mb-0">
+                                        Já tem uma conta? 
+                                        <a href="login.html" class="text-danger text-decoration-none fw-semibold cinema-link">
+                                            Faça login!
+                                            <i class="bi bi-arrow-right ms-1"></i>
+                                        </a>
+                                    </p>
+                                </div>
+                            </form>
+
+                            <!-- Mensagem de erro -->
+                            <div id="mensagemErro" class="alert alert-danger mt-3 d-none cinema-alert" role="alert">
+                                <i class="bi bi-exclamation-triangle me-2"></i>
+                                <span id="mensagemErroTexto"></span>
+                            </div>
+
+                            <!-- Mensagem de sucesso -->
+                            <div id="mensagemSucesso" class="alert alert-success mt-3 d-none cinema-alert" role="alert">
+                                <i class="bi bi-check-circle me-2"></i>
+                                <span id="mensagemSucessoTexto"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Benefícios -->
+                    <div class="row mt-4 g-3">
+                        <div class="col-4 text-center">
+                            <div class="feature-icon text-danger mb-2">
+                                <i class="bi bi-percent display-6"></i>
+                            </div>
+                            <small class="text-white">Descontos Exclusivos</small>
+                        </div>
+                        <div class="col-4 text-center">
+                            <div class="feature-icon text-danger mb-2">
+                                <i class="bi bi-star-fill display-6"></i>
+                            </div>
+                            <small class="text-white">Programa VIP</small>
+                        </div>
+                        <div class="col-4 text-center">
+                            <div class="feature-icon text-danger mb-2">
+                                <i class="bi bi-bell-fill display-6"></i>
+                            </div>
+                            <small class="text-white">Novidades</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        :root {
+            --primary-color: #e50914;
+            --primary-gradient: linear-gradient(135deg, #e50914 0%, #b8070f 100%);
+            --success-color: #22c55e;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-bg: #1a1a1a;
+        }
+
+        body.cadastro-page {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .bg-gradient {
+            background: linear-gradient(135deg, #e50914, #b8070f);
+        }
+        
+        .z-index-1 {
+            z-index: 1;
+        }
+
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+        }
+
+        .cinema-card {
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            transition: all 0.3s ease;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .cinema-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .cinema-input {
+            transition: all 0.3s ease;
+        }
+
+        .cinema-input:focus {
+            box-shadow: 0 0 0 0.25rem rgba(229, 9, 20, 0.25) !important;
+            border-color: #e50914 !important;
+            background-color: #404040 !important;
+            transform: scale(1.02);
+        }
+
+        .cinema-input::placeholder {
+            color: #adb5bd;
+        }
+
+        .input-group-text {
+            width: 50px;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .password-toggle {
+            transition: all 0.3s ease;
+            background-color: transparent !important;
+            border: none !important;
+        }
+
+        .password-toggle:hover {
+            background-color: #6c757d !important;
+            transform: scale(1.1);
+        }
+
+        .password-toggle:focus {
+            box-shadow: none !important;
+            outline: none !important;
+        }
+
+        /* Password Strength Meter */
+        .password-strength-meter {
+            margin-top: 8px;
+        }
+
+        .password-strength-bar {
+            height: 4px;
+            background-color: #374151;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+
+        .password-strength-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            background: linear-gradient(90deg, #ef4444, #f59e0b, #22c55e);
+        }
+
+        .password-strength-weak {
+            width: 25%;
+            background: #ef4444 !important;
+        }
+
+        .password-strength-fair {
+            width: 50%;
+            background: #f59e0b !important;
+        }
+
+        .password-strength-good {
+            width: 75%;
+            background: #22c55e !important;
+        }
+
+        .password-strength-strong {
+            width: 100%;
+            background: #22c55e !important;
+        }
+
+        .cinema-btn {
+            background: var(--primary-gradient);
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cinema-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .cinema-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cinema-btn:hover:not(:disabled)::before {
+            left: 100%;
+        }
+
+        .cinema-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.4);
+            background: var(--primary-gradient);
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            transform: translateY(-1px);
+        }
+
+        .cinema-link {
+            transition: all 0.3s ease;
+        }
+
+        .cinema-link:hover {
+            color: #c40812 !important;
+            text-decoration: underline !important;
+            transform: translateX(5px);
+        }
+
+        .cinema-alert {
+            border: none;
+            border-radius: 10px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .alert-danger {
+            border-left: 4px solid #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .alert-success {
+            border-left: 4px solid #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+
+        .feature-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .form-check-input:checked {
+            background-color: #e50914;
+            border-color: #e50914;
+        }
+
+        .form-check-input:focus {
+            box-shadow: 0 0 0 0.25rem rgba(229, 9, 20, 0.25);
+        }
+
+        /* Password Match Indicator */
+        .password-match-success {
+            color: #22c55e !important;
+        }
+
+        .password-match-error {
+            color: #ef4444 !important;
+        }
+
+        /* Animações */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .logo-circle {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .card-body {
+                padding: 1.5rem !important;
+            }
+
+            .film-reel {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .input-group-lg > .form-control {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+
+    <!-- Carregar apenas o Bootstrap JS e o arquivo cadastro.js externo -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/cadastro.js"></script>
+</body>
+</html>

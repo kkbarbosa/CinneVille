@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vote no Próximo Filme · CineVille</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/assets/style/style.css">
+    <style>
+        .voting-hero {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(229, 9, 20, 0.4));
+            border-radius: 15px;
+            padding: 50px 40px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .movie-vote-card {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border: 2px solid rgba(229, 9, 20, 0.2);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            height: 100%;
+            position: relative;
+        }
+
+        .movie-vote-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.3);
+            border-color: #e50914;
+        }
+
+        .movie-vote-card.voted {
+            border-color: #28a745;
+            box-shadow: 0 15px 35px rgba(40, 167, 69, 0.3);
+        }
+
+        .movie-poster-container {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .movie-vote-card:hover .movie-poster {
+            transform: scale(1.05);
+        }
+
+        .vote-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .vote-btn {
+            background: linear-gradient(135deg, #e50914, #b8070f);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .vote-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(229, 9, 20, 0.4);
+        }
+
+        .vote-btn.voted {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+        }
+
+        .vote-count {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .movie-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: white;
+            padding: 20px;
+        }
+
+        .ranking-card {
+            background: linear-gradient(135deg, #222, #333);
+            border-radius: 15px;
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            padding: 30px;
+        }
+
+        .ranking-item {
+            background: rgba(229, 9, 20, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .ranking-item:hover {
+            background: rgba(229, 9, 20, 0.2);
+            border-left-color: #e50914;
+        }
+
+        .ranking-item.first {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 193, 7, 0.1));
+            border-left-color: #ffd700;
+        }
+
+        .ranking-item.second {
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.2), rgba(108, 117, 125, 0.1));
+            border-left-color: #c0c0c0;
+        }
+
+        .ranking-item.third {
+            background: linear-gradient(135deg, rgba(205, 127, 50, 0.2), rgba(121, 85, 72, 0.1));
+            border-left-color: #cd7f32;
+        }
+
+        .vote-progress {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .vote-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #e50914, #ff4757);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e50914;
+        }
+
+        .voting-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #e50914, #b8070f);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-lg">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="/assets/img/logo.png" alt="CineVille Logo" height="50" class="me-2">
+                    <span class="fw-bold text-danger">CineVille</span>
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="index.html">
+                                <i class="bi bi-film me-1"></i>Filmes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="snacks.html">
+                                <i class="bi bi-cup-straw me-1"></i>Snacks
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="promocoes.html">
+                                <i class="bi bi-percent me-1"></i>Promoções
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="parcerias.html">
+                                <i class="bi bi-handshake me-1"></i>Parcerias
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="contato.html">
+                                <i class="bi bi-envelope me-1"></i>Contato
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="aluguel_sala.html">
+                                <i class="bi bi-building me-1"></i>Aluguel de Salas
+                            </a>
+                        </li>
+                        <li class="nav-item" id="loginLink">
+                            <a class="nav-link btn btn-outline-danger rounded-pill px-3 ms-2" href="login.html">
+                                <i class="bi bi-person me-1"></i>Login/Cadastro
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown" id="userMenu" style="display: none;">
+                            <a class="nav-link dropdown-toggle btn btn-danger rounded-pill px-3 ms-2" href="#"
+                                id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle me-1"></i>Olá, <span id="userNameSpan"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark shadow-lg border-0"
+                                aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="minhaConta.html"><i
+                                            class="bi bi-person me-2"></i>Minha Conta</a></li>
+                                <li><a class="dropdown-item" href="historico.html"><i
+                                            class="bi bi-clock-history me-2"></i>Histórico de Compras</a></li>
+                                <li><a class="dropdown-item" href="carrinho.html"><i class="bi bi-cart me-2"></i>Meu
+                                        carrinho</a></li>
+                                <li><a class="dropdown-item" href="feedback.html"><i
+                                            class="bi bi-chat-square-text me-2"></i>Feedback da sessão</a></li>
+                                <li><a class="dropdown-item" href="admin.html" id="adminLink" style="display: none;">
+                                        <i class="bi bi-gear me-2"></i>Painel Administrativo</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#" id="logoutButton">
+                                        <i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container my-5 flex-grow-1">
+        <!-- Hero Section -->
+        <div class="voting-hero text-white mb-5 mt-4">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="display-4 fw-bold mb-4">
+                        <i class="bi bi-ballot text-warning me-3"></i>
+                        Vote no Próximo Filme!
+                    </h1>
+                    <p class="lead mb-4" id="votingThemeTitle">
+                        Sua opinião é muito importante! Ajude a escolher os próximos clássicos que serão exibidos no
+                        CineVille.
+                    </p>
+                    <!-- <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <span class="badge bg-warning text-dark fs-6 px-3 py-2">
+                            <i class="bi bi-people me-2"></i>Votação Popular
+                        </span>
+                        <span class="badge bg-info fs-6 px-3 py-2">
+                            <i class="bi bi-calendar-event me-2"></i>Válida até 31/12
+                        </span>
+                        <span class="badge bg-success fs-6 px-3 py-2">
+                            <i class="bi bi-gift me-2"></i>Prêmios Especiais
+                        </span>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Voting Stats -->
+        <!-- <div class="stats-section mb-5">
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalVotes">1,247</div>
+                        <p class="text-muted mb-0">Total de Votos</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalParticipants">892</div>
+                        <p class="text-muted mb-0">Participantes</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">15</div>
+                        <p class="text-muted mb-0">Dias Restantes</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <p class="text-muted mb-0">Filmes Candidatos</p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Voting Instructions -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="alert alert-info border-0 shadow-sm"
+                    style="background: linear-gradient(135deg, rgba(23,162,184,0.1), rgba(23,162,184,0.05)); border-left: 4px solid #17a2b8 !important;">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-info-circle fs-4 text-info me-3"></i>
+                        <div>
+                            <h6 class="fw-bold mb-2">Como participar da votação:</h6>
+                            <p class="mb-0 small">
+                                1. Navegue pelos filmes candidatos abaixo<br>
+                                2. Clique no botão "Votar" do filme de sua preferência<br>
+                                3. Você pode votar apenas uma vez por conta<br>
+                                4. Os resultados são atualizados em tempo real
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert Area -->
+        <div id="alertArea" class="mb-4"></div>
+
+        <!-- Movie Candidates -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="text-center text-white fw-bold mb-4">
+                    <i class="bi bi-film text-danger me-2"></i>
+                    Filmes Candidatos
+                </h2>
+            </div>
+        </div>
+
+        <div id="candidatosRow" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+            <!-- Sample movie cards for demo -->
+            <div class="col">
+                <div class="movie-vote-card" data-movie-id="1">
+                    <div class="movie-poster-container">
+                        <span class="voting-badge">CANDIDATO</span>
+                        <span class="vote-count">156 votos</span>
+                        <img src="/assets/img/filmes/interstellar.jpg" alt="Interestelar" class="movie-poster">
+                        <div class="movie-info">
+                            <h5 class="fw-bold mb-2">Interestelar</h5>
+                            <p class="small mb-0">Ficção Científica • 2014 • 169 min</p>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <p class="text-light small mb-3">
+                            Uma equipe de exploradores viaja através de um buraco de minhoca no espaço...
+                        </p>
+                        <div class="vote-progress mb-3">
+                            <div class="vote-progress-bar" style="width: 32%"></div>
+                        </div>
+                        <button class="btn vote-btn text-white" onclick="vote(1)">
+                            <i class="bi bi-hand-thumbs-up me-2"></i>Votar neste Filme
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="movie-vote-card" data-movie-id="2">
+                    <div class="movie-poster-container">
+                        <span class="voting-badge">CANDIDATO</span>
+                        <span class="vote-count">203 votos</span>
+                        <img src="/assets/img/filmes/inception.jpg" alt="A Origem" class="movie-poster">
+                        <div class="movie-info">
+                            <h5 class="fw-bold mb-2">A Origem</h5>
+                            <p class="small mb-0">Ação/Ficção • 2010 • 148 min</p>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <p class="text-light small mb-3">
+                            Dom Cobb é um ladrão especializado em roubar segredos do subconsciente...
+                        </p>
+                        <div class="vote-progress mb-3">
+                            <div class="vote-progress-bar" style="width: 41%"></div>
+                        </div>
+                        <button class="btn vote-btn text-white" onclick="vote(2)">
+                            <i class="bi bi-hand-thumbs-up me-2"></i>Votar neste Filme
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="movie-vote-card" data-movie-id="3">
+                    <div class="movie-poster-container">
+                        <span class="voting-badge">CANDIDATO</span>
+                        <span class="vote-count">89 votos</span>
+                        <img src="/assets/img/filmes/matrix.jpg" alt="Matrix" class="movie-poster">
+                        <div class="movie-info">
+                            <h5 class="fw-bold mb-2">Matrix</h5>
+                            <p class="small mb-0">Ação/Ficção • 1999 • 136 min</p>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <p class="text-light small mb-3">
+                            Neo descobre que a realidade como ele a conhece é na verdade uma simulação...
+                        </p>
+                        <div class="vote-progress mb-3">
+                            <div class="vote-progress-bar" style="width: 18%"></div>
+                        </div>
+                        <button class="btn vote-btn text-white" onclick="vote(3)">
+                            <i class="bi bi-hand-thumbs-up me-2"></i>Votar neste Filme
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="movie-vote-card" data-movie-id="4">
+                    <div class="movie-poster-container">
+                        <span class="voting-badge">CANDIDATO</span>
+                        <span class="vote-count">134 votos</span>
+                        <img src="/assets/img/filmes/pulp-fiction.jpg" alt="Pulp Fiction" class="movie-poster">
+                        <div class="movie-info">
+                            <h5 class="fw-bold mb-2">Pulp Fiction</h5>
+                            <p class="small mb-0">Crime/Drama • 1994 • 154 min</p>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <p class="text-light small mb-3">
+                            As vidas de dois assassinos, um boxeador e um casal de bandidos se entrelaçam...
+                        </p>
+                        <div class="vote-progress mb-3">
+                            <div class="vote-progress-bar" style="width: 27%"></div>
+                        </div>
+                        <button class="btn vote-btn text-white" onclick="vote(4)">
+                            <i class="bi bi-hand-thumbs-up me-2"></i>Votar neste Filme
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="movie-vote-card" data-movie-id="5">
+                    <div class="movie-poster-container">
+                        <span class="voting-badge">CANDIDATO</span>
+                        <span class="vote-count">67 votos</span>
+                        <img src="/assets/img/filmes/blade-runner.jpg" alt="Blade Runner 2049" class="movie-poster">
+                        <div class="movie-info">
+                            <h5 class="fw-bold mb-2">Blade Runner 2049</h5>
+                            <p class="small mb-0">Ficção/Drama • 2017 • 164 min</p>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <p class="text-light small mb-3">
+                            Trinta anos após os eventos do primeiro filme, um novo blade runner descobre...
+                        </p>
+                        <div class="vote-progress mb-3">
+                            <div class="vote-progress-bar" style="width: 14%"></div>
+                        </div>
+                        <button class="btn vote-btn text-white" onclick="vote(5)">
+                            <i class="bi bi-hand-thumbs-up me-2"></i>Votar neste Filme
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Rankings -->
+        <div class="ranking-card">
+            <h3 class="text-center text-white fw-bold mb-4">
+                <i class="bi bi-trophy-fill text-warning me-2"></i>
+                Ranking Atual dos Votos
+            </h3>
+
+            <ol id="resultadoLista" class="list-unstyled">
+                <li class="ranking-item first">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3">
+                                <i class="bi bi-trophy-fill text-warning fs-4"></i>
+                                <span class="fw-bold text-white ms-2">1º</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-white mb-1">A Origem</h6>
+                                <small class="text-muted">Ação/Ficção Científica</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold text-warning">203 votos</div>
+                            <small class="text-muted">41% do total</small>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="ranking-item second">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3">
+                                <i class="bi bi-award-fill" style="color: #c0c0c0; font-size: 1.5rem;"></i>
+                                <span class="fw-bold text-white ms-2">2º</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-white mb-1">Interestelar</h6>
+                                <small class="text-muted">Ficção Científica</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold" style="color: #c0c0c0;">156 votos</div>
+                            <small class="text-muted">32% do total</small>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="ranking-item third">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3">
+                                <i class="bi bi-award-fill" style="color: #cd7f32; font-size: 1.5rem;"></i>
+                                <span class="fw-bold text-white ms-2">3º</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-white mb-1">Pulp Fiction</h6>
+                                <small class="text-muted">Crime/Drama</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold" style="color: #cd7f32;">134 votos</div>
+                            <small class="text-muted">27% do total</small>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="ranking-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3">
+                                <span class="fw-bold text-danger fs-4">4º</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-white mb-1">Matrix</h6>
+                                <small class="text-muted">Ação/Ficção</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold text-white">89 votos</div>
+                            <small class="text-muted">18% do total</small>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="ranking-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3">
+                                <span class="fw-bold text-danger fs-4">5º</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-white mb-1">Blade Runner 2049</h6>
+                                <small class="text-muted">Ficção/Drama</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold text-white">67 votos</div>
+                            <small class="text-muted">14% do total</small>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <!-- Voting Rewards -->
+        <!-- <div class="row mt-5">
+            <div class="col-12">
+                <div class="alert alert-warning border-0 shadow-sm" style="background: linear-gradient(135deg, rgba(255,193,7,0.1), rgba(255,193,7,0.05)); border-left: 4px solid #ffc107 !important;">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-gift fs-4 text-warning me-3"></i>
+                        <div>
+                            <h6 class="fw-bold mb-2">🎁 Prêmios para Participantes:</h6>
+                            <p class="mb-0 small">
+                                • <strong>1º ao 50º votante:</strong> Desconto de 20% no próximo ingresso<br>
+                                • <strong>51º ao 200º votante:</strong> Pipoca grátis na próxima sessão<br>
+                                • <strong>Todos os participantes:</strong> 10 pontos extras no programa de fidelidade
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </main>
+
+    <footer class="bg-dark text-white py-5 mt-0">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="text-danger fw-bold mb-3">
+                        <i class="bi bi-film me-2"></i>CineVille
+                    </h5>
+                    <p class="text-muted">O melhor cinema do seu bairro, com tecnologia de ponta e atendimento
+                        excepcional.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-3 fs-4"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white me-3 fs-4"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">Regulamento da Votação</h6>
+                    <ul class="list-unstyled text-muted small">
+                        <li><i class="bi bi-check me-2"></i>Um voto por conta cadastrada</li>
+                        <li><i class="bi bi-check me-2"></i>Válido até 31/12/2024</li>
+                        <li><i class="bi bi-check me-2"></i>Resultados em tempo real</li>
+                        <li><i class="bi bi-check me-2"></i>Prêmios automáticos</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">Cronograma</h6>
+                    <ul class="list-unstyled text-muted small">
+                        <li><i class="bi bi-calendar me-2"></i>Votação: até 31/12</li>
+                        <li><i class="bi bi-trophy me-2"></i>Resultado: 01/01</li>
+                        <li><i class="bi bi-film me-2"></i>Exibição: Janeiro 2025</li>
+                        <li><i class="bi bi-gift me-2"></i>Entrega prêmios: Imediata</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 Protótipo CineVille - Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="voteSuccessModal" tabindex="-1" aria-labelledby="voteSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white border-0">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title text-success fw-bold" id="voteSuccessModalLabel">
+                        <i class="bi bi-check-circle me-2"></i>Voto Computado!
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <i class="bi bi-ballot-fill text-success" style="font-size: 4rem;"></i>
+                    <h4 class="text-white fw-bold mt-3 mb-2">Obrigado por participar!</h4>
+                    <p class="text-muted mb-3" id="voteMessage">
+                        Seu voto foi registrado com sucesso. Você ganhou 10 pontos no programa de fidelidade!
+                    </p>
+                    <div class="alert alert-success border-0">
+                        <i class="bi bi-gift me-2"></i>
+                        <strong>Prêmio desbloqueado:</strong> Pipoca grátis na próxima sessão!
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                        <i class="bi bi-check2 me-2"></i>Perfeito!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/js/auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Enhanced voting functionality
+        let hasVoted = localStorage.getItem('hasVoted') === 'true';
+        let votedMovieId = localStorage.getItem('votedMovieId');
+
+        function vote(movieId) {
+            if (hasVoted) {
+                showAlert('Você já votou nesta eleição!', 'warning');
+                return;
+            }
+
+            // Mark as voted
+            hasVoted = true;
+            votedMovieId = movieId;
+            localStorage.setItem('hasVoted', 'true');
+            localStorage.setItem('votedMovieId', movieId.toString());
+
+            // Update UI
+            updateVoteUI(movieId);
+
+            // Show success modal
+            const modal = new bootstrap.Modal(document.getElementById('voteSuccessModal'));
+            modal.show();
+
+            // Update stats
+            updateVoteStats();
+        }
+
+        function updateVoteUI(movieId) {
+            const cards = document.querySelectorAll('.movie-vote-card');
+
+            cards.forEach(card => {
+                const btn = card.querySelector('.vote-btn');
+                const cardMovieId = parseInt(card.getAttribute('data-movie-id'));
+
+                if (cardMovieId === movieId) {
+                    card.classList.add('voted');
+                    btn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Seu Voto';
+                    btn.classList.add('voted');
+                    btn.disabled = true;
+                } else {
+                    btn.innerHTML = '<i class="bi bi-x-circle me-2"></i>Votação Encerrada';
+                    btn.disabled = true;
+                    btn.classList.add('btn-secondary');
+                }
+            });
+        }
+
+        function updateVoteStats() {
+            const totalVotesEl = document.getElementById('totalVotes');
+            const totalParticipantsEl = document.getElementById('totalParticipants');
+
+            let currentVotes = parseInt(totalVotesEl.textContent.replace(',', ''));
+            let currentParticipants = parseInt(totalParticipantsEl.textContent.replace(',', ''));
+
+            totalVotesEl.textContent = (currentVotes + 1).toLocaleString();
+            totalParticipantsEl.textContent = (currentParticipants + 1).toLocaleString();
+        }
+
+        function showAlert(message, type) {
+            const alertArea = document.getElementById('alertArea');
+            const alertClass = type === 'warning' ? 'alert-warning' : 'alert-success';
+            const icon = type === 'warning' ? 'exclamation-triangle' : 'check-circle';
+
+            alertArea.innerHTML = `
+                <div class="alert ${alertClass} border-0 shadow-sm alert-dismissible fade show">
+                    <i class="bi bi-${icon} me-2"></i>
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function () {
+            if (hasVoted && votedMovieId) {
+                updateVoteUI(parseInt(votedMovieId));
+            }
+        });
+
+        // Add smooth scroll to ranking when voting
+        function scrollToRanking() {
+            document.getElementById('resultadoLista').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+    <script src="/assets/js/votacao.js"></script>
+</body>
+
+</html>

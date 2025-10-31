@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <title>CineVille - Parcerias e Eventos</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/assets/style/style.css" />
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(229, 9, 20, 0.4));
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .card-partnership {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-partnership::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(229, 9, 20, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .card-partnership:hover::before {
+            left: 100%;
+        }
+
+        .card-partnership:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.3);
+            border-color: rgba(229, 9, 20, 0.6);
+        }
+
+        .access-denied-card {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            border: 2px solid rgba(229, 9, 20, 0.3);
+        }
+
+        .btn-login-access {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login-access:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.4);
+        }
+
+        .btn-login-access::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-login-access:hover::before {
+            left: 100%;
+        }
+
+        .partnership-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 10;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, #e50914, transparent);
+            padding: 20px 30px;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 5px;
+            background: #e50914;
+            border-radius: 0 15px 15px 0;
+        }
+    </style>
+</head>
+
+<body class="parcerias-page">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-lg">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="/assets/img/logo.png" alt="CineVille Logo" height="50" class="me-2">
+                    <span class="fw-bold text-danger">CineVille</span>
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="index.html">
+                                <i class="bi bi-film me-1"></i>Filmes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="snacks.html">
+                                <i class="bi bi-cup-straw me-1"></i>Snacks
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="promocoes.html">
+                                <i class="bi bi-percent me-1"></i>Promoções
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="parcerias.html">
+                                <i class="bi bi-link me-1"></i>Parcerias
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="contato.html">
+                                <i class="bi bi-envelope me-1"></i>Contato
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3" href="aluguel_sala.html">
+                                <i class="bi bi-building me-1"></i>Aluguel de Salas
+                            </a>
+                        </li>
+                        <li class="nav-item" id="loginLink">
+                            <a class="nav-link btn btn-outline-danger rounded-pill px-3 ms-2" href="login.html">
+                                <i class="bi bi-person me-1"></i>Login/Cadastro
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown" id="userMenu" style="display: none;">
+                            <a class="nav-link dropdown-toggle btn btn-danger rounded-pill px-3 ms-2" href="#"
+                                id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle me-1"></i>Olá, <span id="userNameSpan"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark shadow-lg border-0"
+                                aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="minhaConta.html"><i
+                                            class="bi bi-person me-2"></i>Minha Conta</a></li>
+                                <li><a class="dropdown-item" href="historico.html"><i
+                                            class="bi bi-clock-history me-2"></i>Histórico de Compras</a></li>
+                                <li><a class="dropdown-item" href="carrinho.html"><i class="bi bi-cart me-2"></i>Meu
+                                        carrinho</a></li>
+                                <li><a class="dropdown-item" href="feedback.html"><i
+                                            class="bi bi-chat-square-text me-2"></i>Feedback da sessão</a></li>
+                                <li><a class="dropdown-item" href="admin.html" id="adminLink" style="display: none;">
+                                        <i class="bi bi-gear me-2"></i>Painel Administrativo</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#" id="logoutButton">
+                                        <i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-5 pt-4">
+        <!-- Hero Section -->
+        <div class="row justify-content-center mb-5" style="margin-top: 80px;">
+            <div class="col-lg-10">
+                <div class="hero-section p-5 shadow-lg position-relative">
+                    <div class="position-relative z-index-1 text-center">
+                        <i class="bi bi-handshake display-1 text-danger mb-4 d-block"></i>
+                        <h1 class="display-4 fw-bold text-white mb-4">Nossas Parcerias</h1>
+                        <p class="lead text-light mb-4">Conheça as empresas que tornam nossa experiência cinematográfica
+                            ainda mais especial</p>
+                        <div class="row text-center mt-4">
+                            <div class="col-md-4">
+                                <i class="bi bi-award text-warning feature-icon"></i>
+                                <h6 class="text-white">Qualidade Premium</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="bi bi-people text-success feature-icon"></i>
+                                <h6 class="text-white">Networking</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="bi bi-graph-up text-info feature-icon"></i>
+                                <h6 class="text-white">Crescimento</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-not-logged" class="row justify-content-center" style="display: none;">
+            <div class="col-lg-6">
+                <div class="card access-denied-card border-0 shadow-lg rounded-4">
+                    <div class="card-body text-center p-5">
+                        <i class="bi bi-lock-fill display-1 text-danger mb-4"></i>
+                        <h2 class="text-white mb-4 fw-bold">Acesso Restrito</h2>
+                        <p class="lead text-light mb-4">Você precisa estar logado para acessar nossas parcerias
+                            exclusivas</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="login.html?redirect=parcerias.html"
+                                class="btn btn-login-access btn-lg px-4 py-3 text-white fw-bold">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Fazer Login
+                            </a>
+                            <a href="cadastro.html" class="btn btn-outline-danger btn-lg px-4 py-3">
+                                <i class="bi bi-person-plus me-2"></i>Criar Conta
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-logged">
+            <section class="my-5">
+                <div class="section-header">
+                    <h2 class="mb-0 d-flex align-items-center text-white fw-bold">
+                        <i class="bi bi-building me-3 text-danger"></i>
+                        PARCERIAS ESTRATÉGICAS
+                        <span class="badge bg-danger ms-3">Exclusivo</span>
+                    </h2>
+                </div>
+
+                <div id="lista-parcerias-detalhadas" class="row gy-4">
+                    <!-- Benefits Section -->
+                    <div class="row mt-5 g-4">
+                        <div class="col-12">
+                            <div class="section-header">
+                                <h3 class="mb-0 d-flex align-items-center text-white fw-bold">
+                                    <i class="bi bi-gift me-3 text-warning"></i>
+                                    BENEFÍCIOS DAS PARCERIAS
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-partnership border-0 shadow-lg text-center h-100">
+                                <div class="card-body p-4">
+                                    <i class="bi bi-percent display-3 text-success mb-3"></i>
+                                    <h5 class="text-white fw-bold">Descontos Exclusivos</h5>
+                                    <p class="text-light">Ofertas especiais em produtos e serviços dos nossos parceiros
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-partnership border-0 shadow-lg text-center h-100">
+                                <div class="card-body p-4">
+                                    <i class="bi bi-calendar-event display-3 text-warning mb-3"></i>
+                                    <h5 class="text-white fw-bold">Eventos Especiais</h5>
+                                    <p class="text-light">Acesso prioritário a eventos e lançamentos exclusivos</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-partnership border-0 shadow-lg text-center h-100">
+                                <div class="card-body p-4">
+                                    <i class="bi bi-award display-3 text-info mb-3"></i>
+                                    <h5 class="text-white fw-bold">Programa VIP</h5>
+                                    <p class="text-light">Benefícios premium e atendimento diferenciado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="text-danger fw-bold mb-3">
+                        <i class="bi bi-film me-2"></i>CineVille
+                    </h5>
+                    <p class="text-white">O melhor cinema do seu bairro, com tecnologia de ponta e atendimento
+                        excepcional.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-3 fs-4"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white me-3 fs-4"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">Links Rápidos</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">Filmes</a></li>
+                        <li><a href="snacks.html" class="text-white text-decoration-none">Snacks</a></li>
+                        <li><a href="promocoes.html" class="text-white text-decoration-none">Promoções</a></li>
+                        <li><a href="aluguel_sala.html" class="text-white text-decoration-none">Aluguel de Salas</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">Contato</h6>
+                    <ul class="list-unstyled text-white">
+                        <li><i class="bi bi-geo-alt me-2"></i>Rua do Cinema, 123</li>
+                        <li><i class="bi bi-telephone me-2"></i>(11) 9999-9999</li>
+                        <li><i class="bi bi-envelope me-2"></i>contato@cineville.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 Protótipo CineVille - Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/auth.js"></script>
+    <script src="/assets/js/parcerias.js"></script>
+</body>
+</html>
